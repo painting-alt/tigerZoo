@@ -39,7 +39,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### npm run typescript 
+### npm run typescript
 
 运行 typescript 编译器。[相关文章链接](https://jkchao.github.io/typescript-book-chinese/project/compilationContext.html#%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6)
 
