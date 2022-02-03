@@ -12,9 +12,10 @@
         "@types/react-dom": "^17.0.11",
         "husky": "^7.0.4",
         "lint-staged": "^12.3.1",
+        "normalize.css": "^8.0.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-scripts": "5.0.0",
+        "react-scripts": "^5.0.0",
         "typescript": "^4.5.5",
         "web-vitals": "^2.1.4"
     },
@@ -42,7 +43,7 @@
             "prettier"
         ],
         "rules": {
-            "additional-rule": "warn"
+            "additional-rule": "off"
         },
         "overrides": [
             {
@@ -50,7 +51,7 @@
                     "**/*.ts?(x)"
                 ],
                 "rules": {
-                    "additional-typescript-only-rule": "warn"
+                    "additional-typescript-only-rule": "off"
                 }
             }
         ]
