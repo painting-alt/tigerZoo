@@ -1,13 +1,19 @@
-const path = require('path')
+/* 
+通过 CRA（create-react-app）和 craco + craco-alias 创建的 typescript 模板项目如何设置 alias path
+url：
 
-const resolve = dir => path.resolve(__dirname, dir)
+https://juejin.cn/post/6990896895077908487  
+or:
+
+https://blog.csdn.net/huaqi_/article/details/122690410
+ */
+const CracoAlias = require('craco-alias')
 
 module.exports = {
-    webpack: {
-        // 路径别名
-        alias: {
-            '@': resolve('src'),
-            components: resolve('src/components'),
-        },
+    plugin: CracoAlias,
+    options: {
+        source: 'tsconfig',
+        baseUrl: '.',
+        tsConfigPath: './tsconfig.path.json',
     },
 }
