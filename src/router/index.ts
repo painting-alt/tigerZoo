@@ -8,23 +8,24 @@ const routes: any = [
     {
         path: '/',
         exact: true,
-        element: Discuss,
+        component: Discuss,
     },
     {
         path: '/ask',
-        element: Ask,
+        component: Ask,
     },
     {
         path: '/notes',
-        element: Notes,
+        component: Notes,
     },
     {
         path: '/articles',
-        element: Articles,
+        component: Articles,
     },
     {
         path: '/videos',
-        element: Videos,
+        component: Videos,
     },
 ]
+
 export default routes

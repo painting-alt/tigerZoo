@@ -7,13 +7,18 @@ or:
 
 https://blog.csdn.net/huaqi_/article/details/122690410
  */
+
 const CracoAlias = require('craco-alias')
 
 module.exports = {
-    plugin: CracoAlias,
-    options: {
-        source: 'tsconfig',
-        baseUrl: '.',
-        tsConfigPath: './tsconfig.path.json',
-    },
+    plugins: [
+        {
+            plugin: CracoAlias,
+            options: {
+                source: 'tsconfig',
+                baseUrl: '.',
+                tsConfigPath: './tsconfig.path.json',
+            },
+        },
+    ],
 }
