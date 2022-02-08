@@ -5,6 +5,8 @@ import {BrowserRouter } from 'react-router-dom'
 
 // 导入 HTML 元素样式重置文件
 import '@/assets/css/reset.css'
+// assets antd 样式文件
+import '@/assets/css/App.css'
 
 ReactDOM.render(
   <BrowserRouter>
