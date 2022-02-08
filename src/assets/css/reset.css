@@ -74,6 +74,11 @@ img {
 }
 
 /* 全局样式 */
+
+body {
+    background-color: #f4f5f5;
+}
+
 body,
 textarea,
 select,
