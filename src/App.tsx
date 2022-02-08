@@ -4,7 +4,8 @@ import React, { memo } from 'react'
 import { NavLink,useRoutes } from 'react-router-dom'
 
 // 自定义配置文件
-import routes from './router'
+import routes from '@/router'
+
 
 // 组件引入
 import AppHeader from './components/app-header'
@@ -17,11 +18,11 @@ function RouteElement() {
 
 export default memo(function App() {
     return (
-    <div>
-        <AppHeader />
-        <NavLink to="/ask">讨论</NavLink>
-        <RouteElement />
-        <AppAside />
-    </div>
+        <div>
+            <AppHeader />
+            <NavLink to="/ask">讨论</NavLink>
+            <RouteElement />
+            <AppAside />
+        </div>
     )
 })
