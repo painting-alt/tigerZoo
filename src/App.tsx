@@ -21,8 +21,8 @@ export default memo(function App() {
             <AppHeader />
             <div className={ appStyle.appcontent}>
             <div className={ appStyle.app}>
-            <RouteElement />
-            <AppAside />
+            <div className={ appStyle.maincontent}><RouteElement /></div>
+            <div className={ appStyle.aside}><AppAside /></div>
             </div>
             </div>
         </div>

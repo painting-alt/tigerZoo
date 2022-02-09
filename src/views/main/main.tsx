@@ -34,6 +34,7 @@ export default memo(function Main() {
     <span onClick={()=>handleItemClick('articles')}>好文精选</span>
     <span onClick={()=>handleItemClick('videos')}>视频课程</span>
     </div>
+    <hr />
     <Outlet />
   </div>;
 }
