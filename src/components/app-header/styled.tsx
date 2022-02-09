@@ -11,7 +11,7 @@ const Header = styled.header<{}>`
     .actionBar {
         box-sizing: border-box;
         margin: 0 auto;
-        padding: 14px;
+        padding: 14px 0;
         max-width: 1200px;
         display: flex;
         justify-content: space-between;
@@ -28,4 +28,4 @@ const Header = styled.header<{}>`
     }
 `
 
-export { Header }
+export default Header

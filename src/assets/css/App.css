@@ -1,13 +1,17 @@
 @import '~antd/dist/antd.css';
 
-.huaqi {
-    cursor: pointer;
-}
 body {
     background-color: #f4f5f5;
 }
+
 hr {
     background-color: #e5e5e5;
     height: 1px;
     border: 0;
+}
+
+.test {
+    height: 32px;
+    margin: 0;
+    flex-grow: 0;
 }

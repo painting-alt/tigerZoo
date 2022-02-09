@@ -4,7 +4,8 @@ import { Space, Typography, Input, Button, Avatar } from 'antd'
 import { BulbOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons'
 
 //样式相关
-import { Header } from './styled'
+import Header from './styled'
+
 // assets
 import logo from '@/assets/img/logo-01.png'
 
