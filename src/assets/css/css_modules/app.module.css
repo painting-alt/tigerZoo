@@ -1,11 +1,19 @@
 .appcontent {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 .app {
     display: flex;
     justify-content: space-between;
     width: 1200px;
     height: 100%;
+}
+.maincontent {
+    width: 850px;
+    background-color: #fff;
+}
+.aside {
+    width: 320px;
     background-color: #fff;
 }
