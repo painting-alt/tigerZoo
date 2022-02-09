@@ -1,0 +1,12 @@
+.mainlist {
+    position: relative;
+    height: 70px;
+}
+.popular {
+    position: absolute;
+    left: 20px;
+    bottom: 10px;
+}
+.popular .span {
+    padding-right: 30px;
+}
