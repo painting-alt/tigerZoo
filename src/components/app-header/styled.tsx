@@ -17,6 +17,9 @@ const Header = styled.header<{}>`
         justify-content: space-between;
         align-items: center;
 
+        .logo {
+            height: 32px;
+        }
         .operationalZone {
             .point {
                 cursor: pointer;

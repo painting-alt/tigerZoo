@@ -1,20 +1,24 @@
 // 第三方组件
 import React, { memo } from 'react'
-import { Space, Input, Button, Avatar } from 'antd'
+import { Space, Typography, Input, Button, Avatar } from 'antd'
 import { BulbOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons'
 
 //样式相关
 import { Header } from './styled'
 // assets
-// .image 使用方式未知
+import logo from '@/assets/img/logo-01.png'
 
 export default memo(function HQAppHeader() {
     return (
         <Header>
             <div className='actionBar'>
-                <div>
-                    <img className='logo' src='' alt='' />
-                </div>
+                <Typography.Link>
+                    <img
+                        className='logo'
+                        src={logo}
+                        alt='tigerZoo`s logo. this app`s logo'
+                    />
+                </Typography.Link>
                 <Space className='operationalZone' size='large'>
                     <Input
                         className='point search'
