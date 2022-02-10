@@ -1,15 +1,23 @@
 import React, { memo } from 'react'
-import CommunityCard from './components/community-card'
-import UserCard from './components/user-card'
+import CommunityCard from './components/community'
+import UserCard from './components/user'
+import AnnouncementCard from './components/announcement'
+import Popular from './components/popular'
 
 // 样式相关
-import Aside from './styled'
+import { Space } from 'antd'
 
 export default memo(() => {
     return (
-        <Aside>
+        <Space
+            direction='vertical'
+            size='large'
+            style={{ width: '300px', boxSizing: 'border-box' }}
+        >
             <CommunityCard />
             <UserCard />
-        </Aside>
+            <AnnouncementCard />
+            <Popular />
+        </Space>
     )
 })

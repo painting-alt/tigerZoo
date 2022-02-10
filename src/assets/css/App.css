@@ -9,16 +9,15 @@ hr {
     height: 1px;
     border: 0;
 }
+
 #root {
     height: 100%;
 }
+
 #app {
     height: 100%;
 }
 
 .test {
-    box-sizing: border-box;
-    background-color: #fff;
-    border-bottom: 1px solid #e4e6eb;
-    padding: 16px 20px;
+    background-color: #202124;
 }
