@@ -4,8 +4,7 @@ import {useRoutes } from 'react-router-dom'
 // // 自定义配置文件
 import routes from '@/router'
 
-
-function RouteElement() { 
+function RouteElement() {
     const element = useRoutes(routes)
     return element
 }
@@ -15,5 +14,7 @@ export default memo(function App() {
         <div id='app'>
             <RouteElement />
         </div>
+
+
     )
 })

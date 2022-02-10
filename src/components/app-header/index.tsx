@@ -1,13 +1,18 @@
 // 第三方组件
 import React, { memo } from 'react'
+
 import { useNavigate} from 'react-router-dom'
-import { Space, Input, Button } from 'antd'
+import { Space, Input, Button,Typography } from 'antd'
 import { BulbOutlined, SearchOutlined } from '@ant-design/icons'
 
+// import { Space, Typography, Input, Button, Avatar } from 'antd'
+// import { BulbOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons'
+
 //样式相关
-import { Header } from './styled'
+import Header from './styled'
+
 // assets
-// .image 使用方式未知
+import logo from '@/assets/img/logo-01.png'
 
 import UserAvatar from './cpns/userAvatar'
 
@@ -20,9 +25,13 @@ export default memo(function HQAppHeader() {
     return (
         <Header>
             <div className='actionBar'>
-                <div>
-                    <img className='logo' src='' alt='' />
-                </div>
+                <Typography.Link>
+                    <img
+                        className='logo'
+                        src={logo}
+                        alt='tigerZoo`s logo. this app`s logo'
+                    />
+                </Typography.Link>
                 <Space className='operationalZone' size='large'>
                     <Input
                         className='point search'
