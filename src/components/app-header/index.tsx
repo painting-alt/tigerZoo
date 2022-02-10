@@ -49,7 +49,7 @@ export default memo(function HQAppHeader() {
                         style={{ fontSize: '20px' }}
                     />
                     <Avatar
-                        className='point avatar'
+                        className='user`s avatar'
                         size={32}
                         icon={<UserOutlined />}
                     />

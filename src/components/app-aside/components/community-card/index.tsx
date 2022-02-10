@@ -7,7 +7,7 @@ import CommunityCard from './styled'
 // assets
 import logo from '@/assets/img/logo.png'
 
-export default memo(function HQCommunityCard() {
+export default memo(() => {
     return (
         <CommunityCard>
             <div className='card-header'>

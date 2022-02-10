@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-const CommunityCard = styled.div<{}>`
+export default styled.div<{}>`
+    /* 社区卡片样式 */
     width: 100%;
     background-color: #fff;
     margin-bottom: 16px;
@@ -62,5 +63,3 @@ const CommunityCard = styled.div<{}>`
         }
     }
 `
-
-export default CommunityCard
