@@ -1,6 +1,7 @@
 .mainlist {
     position: relative;
     height: 80px;
+    cursor: pointer;
 }
 .popular {
     position: absolute;

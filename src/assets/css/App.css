@@ -9,6 +9,12 @@ hr {
     height: 1px;
     border: 0;
 }
+#root {
+    height: 100%;
+}
+#app {
+    height: 100%;
+}
 
 .test {
     box-sizing: border-box;
