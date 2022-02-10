@@ -11,7 +11,6 @@ import Videos from '@/pages/videos'
 
 import DiscussArticle from '@/pages/discuss/cpns/discussArticle'
 
-
 import type { RouteObject } from 'react-router-dom'
 
 const routes: RouteObject[] = [
@@ -20,11 +19,11 @@ const routes: RouteObject[] = [
         element: <AppHome />,
         children: [
             {
-                path:'/',
+                path: '/',
                 element: <Main />,
                 children: [
                     {
-                        index:true,
+                        index: true,
                         element: <Discuss />,
                     },
                     {
@@ -42,19 +41,19 @@ const routes: RouteObject[] = [
                     {
                         path: 'videos',
                         element: <Videos />,
-                    }
-                ]
+                    },
+                ],
             },
             {
                 path: '/discuss/:id',
-                element:<DiscussArticle/>
+                element: <DiscussArticle />,
             },
-        ]
+        ],
     },
     {
         path: '/login',
-        element:<Login/>
+        element: <Login />,
     },
-    {path:"*",element:<NoMatch />}
+    { path: '*', element: <NoMatch /> },
 ]
 export default routes
