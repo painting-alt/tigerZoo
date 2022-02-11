@@ -10,7 +10,6 @@ interface publishProps {
 }
 
 const publish: React.FC<publishProps> = memo(props => {
-    // const [visible, setVisible] = React.useState(false)
     const [confirmLoading, setConfirmLoading] = React.useState(false)
 
     const { visible, setVisible } = props
@@ -27,6 +26,7 @@ const publish: React.FC<publishProps> = memo(props => {
         console.log('Clicked cancel button')
         setVisible(false)
     }
+
     return (
         <Modal
             title='发布板块'
