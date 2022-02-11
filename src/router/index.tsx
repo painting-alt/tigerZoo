@@ -1,5 +1,6 @@
 import AppHome from '@/views/main'
 import Login from '@/views/login'
+import Publish from '@/views/main/cpns/publish'
 import NoMatch from '@/views/NoMatch'
 
 import Main from '@/views/main/main'
@@ -49,6 +50,10 @@ const routes: RouteObject[] = [
                 element: <DiscussArticle />,
             },
         ],
+    },
+    {
+        path: '/publish',
+        element:<Publish />
     },
     {
         path: '/login',

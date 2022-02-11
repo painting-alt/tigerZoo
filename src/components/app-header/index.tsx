@@ -2,32 +2,40 @@
 import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+
 // 自定义组件
 import UserAvatar from './cpns/userAvatar'
 import Publish from './cpns/publish'
+
 
 // import { Space, Typography, Input, Button, Avatar } from 'antd'
 // import { BulbOutlined, UserOutlined, SearchOutlined } from '@ant-design/icons'
 
 //样式相关
 import Header from './styled'
-import { Space, Input, Button, Typography, Image } from 'antd'
-import { BulbOutlined, SearchOutlined } from '@ant-design/icons'
+import { Space,  Button, Typography, Image } from 'antd'
+import { BulbOutlined,} from '@ant-design/icons'
 
 // assets
 import logo from '@/assets/img/logo-01.png'
 
+
 const { Link } = Typography
-export default memo(function HQAppHeader() {
+// export default memo(function HQAppHeader() {
+//     const [visible, setVisible] = React.useState(false)
+//     const showModal = () => {
+//         setVisible(true)
+//     }
+
+
+export default memo(function HQAppHeader(props) {
     const [visible, setVisible] = React.useState(false)
-    const showModal = () => {
-        setVisible(true)
-    }
     const isLogin = false
     const navigation = useNavigate()
     const jumpToLogin = () => {
         navigation('/login')
     }
+
 
     return (
         <Header>
@@ -42,33 +50,16 @@ export default memo(function HQAppHeader() {
                     />
                 </Link>
                 <Space className='operationalZone' size='large'>
-                    <Input
-                        className='point search'
-                        bordered={false}
-                        style={{
-                            width: 240,
-                            height: 32,
-                            backgroundColor: '#e5e6eb',
-                            borderRadius: 5,
-                        }}
-                        placeholder='输入帖子标题、正文关键字'
-                        suffix={<SearchOutlined />}
-                    />
-                    <Button
-                        onClick={showModal}
-                        type='primary'
-                        style={{
-                            width: 90,
-                            borderRadius: 4,
-                            backgroundColor: '#4080ff',
-                        }}
-                    >
-                        发帖
-                    </Button>
                     <Publish visible={visible} setVisible={setVisible} />
                     <Link href='/#' target='_blank' style={{ color: '#000' }}>
                         <BulbOutlined style={{ fontSize: '20px' }} />
                     </Link>
+
+                    {props.children}
+                    <BulbOutlined
+                        className='point'
+                        style={{ fontSize: '20px' }}
+                    />
                     {isLogin ? (
                         <UserAvatar />
                     ) : (
