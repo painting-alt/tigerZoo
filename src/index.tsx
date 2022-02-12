@@ -3,6 +3,9 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import {BrowserRouter } from 'react-router-dom'
 
+import { Provider } from "react-redux";
+import store from './store'
+
 // 导入 HTML 元素样式重置文件
 import '@/assets/css/reset.css'
 // assets antd 样式文件
@@ -10,7 +13,9 @@ import '@/assets/css/App.css'
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={ store}>
+      <App />
+    </Provider>
   </BrowserRouter>
   , document.getElementById('root'))
 
