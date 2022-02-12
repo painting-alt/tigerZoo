@@ -5,7 +5,10 @@ import {useDispatch,useSelector } from 'react-redux'
 import { Modal, Button, Space, Input } from 'antd'
 
 // action
-import { changeTitleAction,changeTagAction} from '@/store/actionCreators'
+import { changeTitleAction, changeTagAction } from '@/store/actionCreators'
+
+//网络请求
+import {publishData } from '@/network/publish'
 
 // 参数类型
 interface publishProps {
@@ -34,7 +37,14 @@ const publish: React.FC<publishProps> = memo(props => {
             setConfirmLoading(false)
         }, 2000)
          // 发送网络请求，将store中的title、article、tag发送到后台
-         console.log(articleTitle,article,articleTag);
+        console.log(articleTitle, article, articleTag);
+        publishData({
+            title: articleTitle,
+            content: article,
+            tag:articleTag
+        }).then(res => { 
+            console.log(res)
+        })
     }
 
     const handleCancel = () => {
