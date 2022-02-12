@@ -2,7 +2,6 @@
     "name": "tiger-zoo",
     "version": "0.1.0",
     "private": true,
-    "proxy":"https://qcu332.api.cloudendpoint.cn/",
     "dependencies": {
         "@ant-design/icons": "^4.7.0",
         "@craco/craco": "^7.0.0-alpha.0",
@@ -18,6 +17,7 @@
         "antd": "^4.18.6",
         "axios": "^0.25.0",
         "craco-alias": "^3.0.1",
+        "http-proxy-middleware": "^2.0.3",
         "husky": "^7.0.4",
         "lint-staged": "^12.3.1",
         "markdown-it": "^12.3.2",

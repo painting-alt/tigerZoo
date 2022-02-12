@@ -25,7 +25,7 @@ export default memo(function HQAppHeader(props) {
     return (
         <Header>
             <div className='actionBar'>
-                <Link href='/#' target='_blank'>
+                <Link href='/#'>
                     <Image
                         src={logo}
                         alt='tigerZoo`s logo. this app`s logo'
@@ -35,15 +35,11 @@ export default memo(function HQAppHeader(props) {
                     />
                 </Link>
                 <Space className='operationalZone' size='large'>
+                    {props.children}
+
                     <Link href='/#' target='_blank' style={{ color: '#000' }}>
                         <BulbOutlined style={{ fontSize: '20px' }} />
                     </Link>
-
-                    {props.children}
-                    <BulbOutlined
-                        className='point'
-                        style={{ fontSize: '20px' }}
-                    />
                     {isLogin ? (
                         <UserAvatar />
                     ) : (
