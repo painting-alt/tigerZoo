@@ -1,1 +1,3 @@
 export const CHANGE_ARTICLE = 'CHANGE_ARTICLE'
+export const CHANGE_TITLE = 'CHANGE_TITLE'
+export const CHANGE_TAG = 'CHANGE_TAG'
