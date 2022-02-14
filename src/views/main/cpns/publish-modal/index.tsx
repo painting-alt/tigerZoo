@@ -1,5 +1,6 @@
-import React, { memo, useState } from 'react'
-import {useDispatch,useSelector } from 'react-redux'
+import React, { memo, useEffect, useState} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import {useNavigate } from 'react-router-dom'
 
 // 样式相关
 import { Modal, Button, Space, Input } from 'antd'
@@ -16,36 +17,60 @@ interface publishProps {
     setVisible: Function
 }
 
-const publish: React.FC<publishProps> = memo(props => {
+const Publish: React.FC<publishProps> = memo(props => {
     const [confirmLoading, setConfirmLoading] = React.useState(false)
 
     const { visible, setVisible } = props
 
     const dispatch = useDispatch()
 
+    const navigation = useNavigate()
+
     let [title, setTitle] = useState('')
     const articleTitle = useSelector((state: any) => state.title)
     const article = useSelector((state: any) => state.article)
-    const articleTag = useSelector((state:any) => state.tag)
-
-    // 点击发布文章按钮
-    const handleOk = () => {
-        setConfirmLoading(true)
-        // console.log(title);       
-        setTimeout(() => {
-            setVisible(false)
-            setConfirmLoading(false)
-        }, 2000)
-         // 发送网络请求，将store中的title、article、tag发送到后台
-        console.log(articleTitle, article, articleTag);
-        publishData({
-            title: articleTitle,
-            content: article,
-            tag:articleTag
-        }).then(res => { 
-            console.log(res)
-        })
-    }
+    const articleTag = useSelector((state: any) => state.tag)
+    
+    // const handleOk =  async () => {
+    //     setConfirmLoading(true)
+    //     // console.log(title);       
+    //     setTimeout(() => {
+    //         setVisible(false)
+    //         setConfirmLoading(false)
+    //     }, 2000)
+    //     // 发送网络请求，将store中的title、article、tag发送到后台
+    //     console.log(articleTitle, article, articleTag);
+    //        //在没有卸载之前发送网络请求
+    //         await publishData({
+    //             title: articleTitle,
+    //             content: article,
+    //             tag: articleTag
+    //         })
+    //         navigation('/show')
+    // }
+    let handleOk:any;
+    useEffect(() => { 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+         handleOk = async ()=>{
+            setConfirmLoading(true)
+            // console.log(title);       
+            setTimeout(() => {
+                setVisible(false)
+                setConfirmLoading(false)
+            }, 2000)
+            // 发送网络请求，将store中的title、article、tag发送到后台
+            console.log(articleTitle, article, articleTag);
+               //在没有卸载之前发送网络请求
+                await publishData({
+                    title: articleTitle,
+                    content: article,
+                    tag: articleTag
+                })
+                navigation('/show')
+        }
+    // handleOk()
+    })
 
     const handleCancel = () => {
         // console.log('Clicked cancel button')
@@ -71,7 +96,7 @@ const publish: React.FC<publishProps> = memo(props => {
             visible={visible}
             okText='发布文章'
             cancelText='取消发布'
-            onOk={handleOk}
+            onOk={()=>handleOk()}
             confirmLoading={confirmLoading}
             onCancel={handleCancel}
         >
@@ -89,4 +114,4 @@ const publish: React.FC<publishProps> = memo(props => {
     )
 })
 
-export default publish
+export default Publish

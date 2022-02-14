@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default function request(config: any) {
     const instance = axios.create({
-        baseURL: 'https://qcu332.api.cloudendpoint.cn/',
+        baseURL: 'https://qcilfy.api.cloudendpoint.cn/',
     })
 
     instance.interceptors.request.use(
