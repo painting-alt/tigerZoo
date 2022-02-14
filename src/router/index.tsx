@@ -10,6 +10,8 @@ import Notes from '@/pages/notes'
 import Articles from '@/pages/articles'
 import Videos from '@/pages/videos'
 
+import ShowArticle from '@/components/show-article'
+
 import DiscussArticle from '@/pages/discuss/cpns/discussArticle'
 
 import type { RouteObject } from 'react-router-dom'
@@ -44,6 +46,10 @@ const routes: RouteObject[] = [
                         element: <Videos />,
                     },
                 ],
+            },
+            {
+                path: '/show',
+                element:<ShowArticle />
             },
             {
                 path: '/discuss/:id',

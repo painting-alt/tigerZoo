@@ -12,7 +12,7 @@ import mainlist from '@/assets/css/css_modules/mainlist.module.css'
 
 export default memo(function MainList() {
   let navigate = useNavigate();
-  function jumpToArticle(){ 
+  function jumpToArticle() { 
     navigate('/discuss/1')
   }
   return (
