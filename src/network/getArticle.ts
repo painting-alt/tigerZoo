@@ -1,8 +1,14 @@
 import request from './request'
 
-export function getArticle(params: number) {
+export function getAllArticle() {
     return request({
-        url: 'getArticle',
-        params,
+        url: 'getAllArticle',
+    })
+}
+
+export function getOneArticle(id: any) {
+    return request({
+        url: 'getOneArticle',
+        params: id,
     })
 }

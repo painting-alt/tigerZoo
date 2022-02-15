@@ -1,11 +1,27 @@
 import React, { memo } from 'react';
 import { Outlet,useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux'
 // 样式
 import mainStyle from '@/assets/css/css_modules/main.module.css'
 
+import { changeAllArtcile } from '@/store/actionCreators'; 
+
+import { getAllArticle } from '@/network/getArticle';
+
+
 export default memo(function Main() {
   let navigate = useNavigate();
+  const dispatch = useDispatch()
+  // 进入这个页面就发送网络请求
+  const fetch = async() => { 
+    const result:any = await getAllArticle()
+    console.log(result)
+    function pushToStore() { 
+      dispatch(changeAllArtcile(result.result))
+    }
+    pushToStore()
+  }
+  fetch()
   function handleItemClick(item: string) { 
     switch (item) { 
       case 'discuss':

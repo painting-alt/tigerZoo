@@ -8,9 +8,9 @@ import articleStyle from '@/assets/css/css_modules/article.module.css'
 
 
 export default memo(function ShowArticle() {
-  const articleTitle = useSelector((state: any) => state.oneArticle.title)
-  const article = useSelector((state: any) => state.oneArticle.content)
-  const articleTag = useSelector((state:any) => state.oneArticle.tag)
+  const articleTitle = useSelector((state: any) => state.title)
+  const article = useSelector((state: any) => state.article)
+  const articleTag = useSelector((state:any) => state.tag)
   console.log(articleTitle, article, articleTag)
   return (
     <div style={{ padding: "30px" }}>
