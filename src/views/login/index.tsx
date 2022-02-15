@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 // 自定义组件
 import LoginPhone from './components/login-phone'
@@ -20,21 +21,34 @@ const loginList: any = [
     },
 ]
 
-const contentList: any = {
-    loginByCode: <LoginPhone />,
-    loginByPassword: <LoginPassword />,
-}
-
 const login = memo(() => {
+    const [visible, setVisible] = useState<boolean>(false)
     const [activeTabKey, setActiveTabKey] = useState<any>('loginByCode')
+    const navigation = useNavigate()
+
+    // 路由跳转
+    const jumpToIndex = () => {
+        navigation('/')
+    }
+
+    // modal 内容列表
+    const contentList: any = {
+        loginByCode: <LoginPhone jumpToIndex={jumpToIndex} />,
+        loginByPassword: <LoginPassword jumpToIndex={jumpToIndex} />,
+    }
+
+    // tab 切换
     const tabChange = (key: any) => {
         setActiveTabKey(key)
     }
-    const [visible, setVisible] = useState<boolean>(false)
 
     return (
         <StyledLogin>
-            <RegisterModal visible={visible} setVisible={setVisible} />
+            <RegisterModal
+                visible={visible}
+                setVisible={setVisible}
+                jumpToIndex={jumpToIndex}
+            />
             <Card
                 className='card'
                 title='登录'

@@ -1,17 +1,22 @@
 // 第三方
-import React, { useState } from 'react'
-import InspireCloud from '@byteinspire/js-sdk'
+import React, { FC, memo, useState } from 'react'
+import inspirecloud from '@/network/light-initial'
 
 // 样式相关
 import StyledForm from './styled'
 import { Form, Input, Button, message } from 'antd'
 import { MobileTwoTone, MessageTwoTone } from '@ant-design/icons'
 
-// 轻服务的的 serviceId
-const serviceId = 'qcilfy'
-const inspirecloud = new InspireCloud({ serviceId })
+// LoginPhoneProps 组件参数类型
+interface phoneProps {
+    jumpToIndex: () => void
+}
 
-export default function Login() {
+const LoginPhone: FC<phoneProps> = memo(props => {
+    // 父组件传入数据
+    const { jumpToIndex } = props
+
+    // 组件内部数据
     const [phoneNumber, setPhoneNumber] = useState<number>()
     const [isEnterNumber, setIsEnterNumber] = useState<boolean>(false)
     const [isSendMessage, setIsSendMeesage] = useState<boolean>(true)
@@ -86,8 +91,12 @@ export default function Login() {
                 code,
             })
             .then(res => {
-                console.log(res)
                 setIsLogin(false)
+                if (res.sucess) {
+                    jumpToIndex()
+                } else {
+                    message.error(res.message)
+                }
             })
     }
 
@@ -151,4 +160,6 @@ export default function Login() {
             </Form.Item>
         </StyledForm>
     )
-}
+})
+
+export default LoginPhone

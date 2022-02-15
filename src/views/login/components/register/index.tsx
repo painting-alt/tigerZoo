@@ -1,6 +1,6 @@
 // 第三方
 import React, { memo, FC, useState } from 'react'
-import InspireCloud from '@byteinspire/js-sdk'
+import inspirecloud from '@/network/light-initial'
 
 // 样式相关
 import StyledModal from './styled'
@@ -35,11 +35,12 @@ const formItemLayout = {
 interface registerProps {
     visible: boolean
     setVisible: (values: boolean) => void
+    jumpToIndex: () => void
 }
 
 const Register: FC<registerProps> = memo(props => {
     // 解构参数
-    const { visible, setVisible } = props
+    const { visible, setVisible, jumpToIndex } = props
 
     // 定义自身数据
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false)
@@ -62,9 +63,6 @@ const Register: FC<registerProps> = memo(props => {
             })
     }
 
-    const serviceId = 'qcilfy'
-    const inspirecloud = new InspireCloud({ serviceId })
-
     // 创建用户事件
     const createUser = (values: any) => {
         console.log(values)
@@ -77,6 +75,7 @@ const Register: FC<registerProps> = memo(props => {
             .then(res => {
                 if (res.sucess) {
                     console.log(res)
+                    jumpToIndex()
                 } else {
                     message.error(res.message)
                 }

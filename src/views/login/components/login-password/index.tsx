@@ -1,17 +1,23 @@
 // 第三方
-import React, { memo, useState } from 'react'
-import InspireCloud from '@byteinspire/js-sdk'
+import React, { FC, memo, useState } from 'react'
+import inspirecloud from '@/network/light-initial'
 
 // 样式相关
 import StyledForm from './styled'
 import { Form, Input, Button, Checkbox, message } from 'antd'
 import { SmileTwoTone, LockTwoTone } from '@ant-design/icons'
 
-const LoginPassword = memo(() => {
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+// LoginPasswordProps 组件参数类型
+interface passwordProps {
+    jumpToIndex: () => void
+}
 
-    const serviceId = 'qcilfy'
-    const inspirecloud = new InspireCloud({ serviceId })
+const LoginPassword: FC<passwordProps> = memo(props => {
+    // 父组件传入数据
+    const { jumpToIndex } = props
+
+    // 组件内部数据
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const onFinish = (values: any) => {
         const { username, password } = values
@@ -23,12 +29,13 @@ const LoginPassword = memo(() => {
                 password,
             })
             .then(res => {
-                if (res.success) {
-                    console.log('登录成功')
+                setIsLoading(false)
+                if (res.sucess) {
+                    console.log(res)
+                    jumpToIndex()
                 } else {
                     message.error(res.message)
                 }
-                setIsLoading(false)
             })
     }
     return (
