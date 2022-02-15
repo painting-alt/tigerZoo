@@ -4,7 +4,7 @@ import InspireCloud from '@byteinspire/js-sdk'
 
 // 样式相关
 import StyledForm from './styled'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, message } from 'antd'
 import { MobileTwoTone, MessageTwoTone } from '@ant-design/icons'
 
 // 轻服务的的 serviceId
@@ -13,9 +13,9 @@ const inspirecloud = new InspireCloud({ serviceId })
 
 export default function Login() {
     const [phoneNumber, setPhoneNumber] = useState<number>()
-    const [authCode, setAuthCode] = useState<string>()
     const [isEnterNumber, setIsEnterNumber] = useState<boolean>(false)
     const [isSendMessage, setIsSendMeesage] = useState<boolean>(true)
+    const [isLogin, setIsLogin] = useState<boolean>(false)
 
     // 验证手机号码
     const validateMobile = (obj: any, value: any) => {
@@ -58,24 +58,26 @@ export default function Login() {
         setIsSendMeesage(false)
 
         // 调用云函数中名为 loginAPI 的函数
-        return inspirecloud
+        inspirecloud
             .run('sendMessageAPI', {
                 phoneNumber,
             })
             .then(res => {
-                console.log(res)
+                if (res.sucess) {
+                    console.log(res.message)
+                } else {
+                    message.error(res.message)
+                }
+
                 setIsSendMeesage(true)
             })
     }
 
-    // 短信验证码输入事件
-    const enterAuthCode = (e: any) => {
-        setAuthCode(e.target.value)
-    }
+    // 表单事件结束
+    const onFinish = (values: any) => {
+        const { phoneNumber, authCode: code } = values
 
-    // 登录事件
-    const login = () => {
-        const code = authCode
+        setIsLogin(true)
 
         // 调用云函数中名为 loginAPI 的函数
         inspirecloud
@@ -85,11 +87,8 @@ export default function Login() {
             })
             .then(res => {
                 console.log(res)
+                setIsLogin(false)
             })
-    }
-    // 表单事件结束
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values)
     }
 
     return (
@@ -108,7 +107,6 @@ export default function Login() {
                 <Input
                     prefix={<MobileTwoTone />}
                     placeholder='手机号'
-                    value={phoneNumber}
                     onChange={e => enterPhoneNumber(e)}
                 />
             </Form.Item>
@@ -127,8 +125,6 @@ export default function Login() {
                         placeholder='六位短信验证码'
                         style={{ width: '50%' }}
                         type='text'
-                        value={authCode}
-                        onChange={e => enterAuthCode(e)}
                     />
 
                     <Button
@@ -145,9 +141,10 @@ export default function Login() {
             </Form.Item>
             <Form.Item>
                 <Button
-                    type='primary'
                     className='login-form-button'
-                    onClick={e => login()}
+                    type='primary'
+                    htmlType='submit'
+                    loading={isLogin}
                 >
                     注册 / 登录
                 </Button>

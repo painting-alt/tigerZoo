@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,10 +14,10 @@ import { publishData } from '@/network/publish'
 // Publish 组件参数类型
 interface publishProps {
     visible: boolean
-    setVisible: Function
+    setVisible: (values: boolean) => void
 }
 
-const Publish: React.FC<publishProps> = memo(props => {
+const Publish: FC<publishProps> = memo(props => {
     const { visible, setVisible } = props
 
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false)

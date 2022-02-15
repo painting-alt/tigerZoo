@@ -3,10 +3,11 @@ import React, { memo, useState } from 'react'
 // 自定义组件
 import LoginPhone from './components/login-phone'
 import LoginPassword from './components/login-password'
+import RegisterModal from './components/register'
 
 // 样式相关
 import StyledLogin from './styled'
-import { Card } from 'antd'
+import { Card, Button } from 'antd'
 
 const loginList: any = [
     {
@@ -25,20 +26,30 @@ const contentList: any = {
 }
 
 const login = memo(() => {
-    const [activeTabKey, setActiveTabKey] = useState('loginByCode')
+    const [activeTabKey, setActiveTabKey] = useState<any>('loginByCode')
     const tabChange = (key: any) => {
         setActiveTabKey(key)
     }
+    const [visible, setVisible] = useState<boolean>(false)
 
     return (
         <StyledLogin>
+            <RegisterModal visible={visible} setVisible={setVisible} />
             <Card
                 className='card'
                 title='登录'
                 bodyStyle={{
                     marginTop: '20px',
                 }}
-                extra={<a href='#/'>注册</a>}
+                extra={
+                    <Button
+                        className='registerBtn'
+                        ghost
+                        onClick={e => setVisible(true)}
+                    >
+                        注册
+                    </Button>
+                }
                 tabList={loginList}
                 activeTabKey={activeTabKey}
                 onTabChange={key => tabChange(key)}

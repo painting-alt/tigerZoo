@@ -13,5 +13,9 @@ export default styled.div`
         padding: 10px;
         border-radius: 10px;
         box-shadow: 0 5px 5px #a7a7a7;
+
+        .registerBtn {
+            color: #1890ff;
+        }
     }
 `
