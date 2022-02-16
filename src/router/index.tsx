@@ -15,6 +15,7 @@ import ShowArticle from '@/components/show-article'
 import DiscussArticle from '@/pages/discuss/cpns/discussArticle'
 
 import type { RouteObject } from 'react-router-dom'
+import PreviewArticle from '@/components/preview-article'
 
 const routes: RouteObject[] = [
     {
@@ -48,12 +49,12 @@ const routes: RouteObject[] = [
                 ],
             },
             {
-                path: '/show',
+                path: '/show/:id',
                 element: <ShowArticle />,
             },
             {
-                path: '/discuss/:id',
-                element: <DiscussArticle />,
+                path: '/preview/:id',
+                element: <PreviewArticle />,
             },
         ],
     },
