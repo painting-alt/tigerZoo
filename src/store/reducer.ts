@@ -1,22 +1,13 @@
-import { CHANGE_ARTICLE, CHANGE_TITLE, CHANGE_TAG } from './constants'
+import { combineReducers } from 'redux'
 
-const defaultState = {
-    article: '',
-    title: '',
-    tag: '',
-}
+import articleReducer from './article/reducer'
+import authReducer from './auth/reducer'
+import userReducer from './user/reducer'
 
-function reducer(state = defaultState, action: any) {
-    switch (action.type) {
-        case CHANGE_ARTICLE:
-            return { ...state, article: action.text }
-        case CHANGE_TITLE:
-            return { ...state, title: action.title }
-        case CHANGE_TAG:
-            return { ...state, tag: action.tag }
-        default:
-            return state
-    }
-}
+const rootReducer = combineReducers({
+    article: articleReducer,
+    auth: authReducer,
+    user: userReducer,
+})
 
-export default reducer
+export default rootReducer

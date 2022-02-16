@@ -5,15 +5,15 @@ import { Form } from 'antd'
 export default styled(Form)`
     width: 100%;
 
-    .login-form-forgot {
+    .signin-form-forgot {
         float: right;
     }
 
-    .ant-col-rtl .login-form-forgot {
+    .ant-col-rtl .signin-form-forgot {
         float: left;
     }
 
-    .login-form-button {
+    .signin-form-button {
         width: 100%;
     }
 `

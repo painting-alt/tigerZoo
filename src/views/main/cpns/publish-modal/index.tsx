@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom'
 import { Modal, Button, Space, Input } from 'antd'
 
 // action
-import { changeTitleAction, changeTagAction } from '@/store/actionCreators'
+import {
+    changeTitleAction,
+    changeTagAction,
+} from '@/store/article/actionCreators'
 
 // 网络请求
 import { publishData } from '@/network/publish'

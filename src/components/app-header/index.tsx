@@ -5,6 +5,9 @@ import { useNavigate } from 'react-router-dom'
 // 自定义组件
 import UserAvatar from './cpns/userAvatar'
 
+// redux 相关
+import { useSelector } from 'react-redux'
+
 // 样式相关
 import Header from './styled'
 import { Space, Button, Typography, Image } from 'antd'
@@ -12,14 +15,20 @@ import { BulbOutlined } from '@ant-design/icons'
 
 // assets
 import logo from '@/assets/img/logo-01.png'
+import IAppState from '@/store/type'
+import { IUserState } from '@/store/user/type'
 
 const { Link } = Typography
 
 export default memo(function HQAppHeader(props) {
-    const isLogin = false
+    // 获取用户登录态
+    const user = useSelector<IAppState, IUserState>(state => state.user)
+    const isLogin = user.userStatus.isAuth
+    console.log(isLogin)
+
     const navigation = useNavigate()
     const jumpToLogin = () => {
-        navigation('/login')
+        navigation('/auth')
     }
 
     return (

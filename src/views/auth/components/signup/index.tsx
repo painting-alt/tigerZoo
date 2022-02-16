@@ -1,6 +1,11 @@
 // 第三方
-import React, { memo, FC, useState } from 'react'
-import inspirecloud from '@/network/light-initial'
+import React, { memo, FC, useState, useEffect } from 'react'
+
+// redux 相关
+import { useDispatch, useSelector } from 'react-redux'
+import IAppState from '@/store/type'
+import { lightSignup, resetSignup } from '@/store/auth/actionCreators'
+import { IAuthState, ISignupPayload } from '@/store/auth/type'
 
 // 样式相关
 import StyledModal from './styled'
@@ -31,26 +36,28 @@ const formItemLayout = {
     return Promise.resolve()
 } */
 
-// Register 组件参数类型
-interface registerProps {
+// signup 组件参数类型
+interface signupProps {
     visible: boolean
     setVisible: (values: boolean) => void
     jumpToIndex: () => void
 }
 
-const Register: FC<registerProps> = memo(props => {
+const signup: FC<signupProps> = memo(props => {
     // 解构参数
     const { visible, setVisible, jumpToIndex } = props
 
     // 定义自身数据
+    const [isDisabled, setIsDisabled] = useState<boolean>(true)
     const [confirmLoading, setConfirmLoading] = useState<boolean>(false)
 
+    // 获取 dispatch 方法
+    const dispatch = useDispatch()
+
+    // 获取注册结果
+    const auth = useSelector<IAppState, IAuthState>(state => state.auth)
     // 表单实例
     const [form] = Form.useForm()
-
-    const handleCancel = () => {
-        setVisible(false)
-    }
 
     const handleOk = () => {
         setConfirmLoading(true)
@@ -59,46 +66,60 @@ const Register: FC<registerProps> = memo(props => {
                 createUser(values)
             })
             .catch(info => {
-                console.log('Validate Failed:', info)
-            })
-    }
-
-    // 创建用户事件
-    const createUser = (values: any) => {
-        console.log(values)
-        const { username, password } = values
-        inspirecloud
-            .run('createUser', {
-                username,
-                password,
-            })
-            .then(res => {
-                if (res.sucess) {
-                    console.log(res)
-                    jumpToIndex()
-                } else {
-                    message.error(res.message)
-                }
-
+                console.log(info)
+                message.error(`${info.errorFields[0].errors[0]}`, 3)
                 setConfirmLoading(false)
             })
     }
+
+    // 注册表单提交
+    const createUser = (value: ISignupPayload) => {
+        // 发送注册请求
+        dispatch(lightSignup(value))
+    }
+
+    // 监听状态
+    useEffect(() => {
+        // 1. 注册成功, 清空表单、清除按钮 loading 并跳转至 index 页面
+        return () => {
+            if (auth.signup.loaded && auth.signup.success) {
+                form.resetFields()
+                setConfirmLoading(false)
+                jumpToIndex()
+            }
+        }
+    }, [auth.signup, form, jumpToIndex])
+
+    useEffect(() => {
+        // 2. 注册失败 显示失败的提示信息
+        if (auth.signup.loaded && !auth.signup.success) {
+            setConfirmLoading(false)
+            message.error(auth.signup.message)
+        }
+    }, [auth.signup])
+
+    // 3. 离开页面之前重置页面注册状态
+    useEffect(() => {
+        return () => {
+            dispatch(resetSignup())
+        }
+    }, [dispatch])
 
     return (
         <StyledModal
             title='注册信息'
             cancelText='取消'
             okText='确认注册'
-            okButtonProps={{ htmlType: 'submit' }}
+            okButtonProps={{ htmlType: 'submit', disabled: isDisabled }}
             visible={visible}
             confirmLoading={confirmLoading}
-            onCancel={handleCancel}
+            onCancel={() => setVisible(false)}
             onOk={() => handleOk()}
         >
             <Form
                 {...formItemLayout}
                 form={form}
-                name='register'
+                name='signup'
                 scrollToFirstError
             >
                 <Form.Item
@@ -140,12 +161,14 @@ const Register: FC<registerProps> = memo(props => {
                             required: true,
                             message: '请重复输入密码',
                         },
+                        /* 此处存在bug， 删除确认框内容后，触发setIsDisabled() */
                         ({ getFieldValue }) => ({
                             validator(_, value) {
                                 if (
                                     !value ||
                                     getFieldValue('password') === value
                                 ) {
+                                    setIsDisabled(false)
                                     return Promise.resolve()
                                 }
                                 return Promise.reject(
@@ -203,4 +226,4 @@ const Register: FC<registerProps> = memo(props => {
     )
 })
 
-export default Register
+export default signup

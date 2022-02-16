@@ -1,5 +1,5 @@
 import AppHome from '@/views/main'
-import Login from '@/views/login'
+import Auth from '@/views/auth'
 import Publish from '@/views/main/cpns/publish'
 import NoMatch from '@/views/NoMatch'
 
@@ -49,7 +49,7 @@ const routes: RouteObject[] = [
             },
             {
                 path: '/show',
-                element:<ShowArticle />
+                element: <ShowArticle />,
             },
             {
                 path: '/discuss/:id',
@@ -59,11 +59,11 @@ const routes: RouteObject[] = [
     },
     {
         path: '/publish',
-        element:<Publish />
+        element: <Publish />,
     },
     {
-        path: '/login',
-        element: <Login />,
+        path: '/auth',
+        element: <Auth />,
     },
     { path: '*', element: <NoMatch /> },
 ]

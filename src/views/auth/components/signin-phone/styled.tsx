@@ -5,7 +5,7 @@ import { Form } from 'antd'
 export default styled(Form)`
     width: 100%;
 
-    .login-form-button {
+    .signin-form-button {
         width: 100%;
     }
 `

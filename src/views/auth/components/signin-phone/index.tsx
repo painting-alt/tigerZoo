@@ -1,11 +1,16 @@
 // 第三方
-import React, { FC, memo, useState } from 'react'
-import inspirecloud from '@/network/light-initial'
+import React, { FC, memo, useEffect, useState } from 'react'
 
 // 样式相关
 import StyledForm from './styled'
 import { Form, Input, Button, message } from 'antd'
 import { MobileTwoTone, MessageTwoTone } from '@ant-design/icons'
+
+// redux 相关
+import { useDispatch, useSelector } from 'react-redux'
+import IAppState from '@/store/type'
+import { IAuthState } from '@/store/auth/type'
+import { lightSendSms, lightSigninByCode } from '@/store/auth/actionCreators'
 
 // LoginPhoneProps 组件参数类型
 interface phoneProps {
@@ -17,10 +22,10 @@ const LoginPhone: FC<phoneProps> = memo(props => {
     const { jumpToIndex } = props
 
     // 组件内部数据
-    const [phoneNumber, setPhoneNumber] = useState<number>()
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
     const [isEnterNumber, setIsEnterNumber] = useState<boolean>(false)
-    const [isSendMessage, setIsSendMeesage] = useState<boolean>(true)
-    const [isLogin, setIsLogin] = useState<boolean>(false)
+    const [sendSmsLoading, setSendSmsLoading] = useState<boolean>(false)
+    const [loginLoading, setLoginLoading] = useState<boolean>(false)
 
     // 验证手机号码
     const validateMobile = (obj: any, value: any) => {
@@ -52,58 +57,69 @@ const LoginPhone: FC<phoneProps> = memo(props => {
         return Promise.resolve()
     }
 
-    // 手机号输入事件
-    const enterPhoneNumber = (e: any) => {
-        setPhoneNumber(e.target.value)
-    }
+    //  获取 dipatch 方法
+    const dispatch = useDispatch()
+
+    // 获取短信发送结果、登录结果
+    const auth = useSelector<IAppState, IAuthState>(state => state.auth)
+
+    useEffect(() => {
+        // 短信验证码发送失败
+        if (auth.sendSms.loaded && !auth.sendSms.success) {
+            message.error(auth.sendSms.message)
+            setSendSmsLoading(false)
+        }
+
+        // 短信验证码发送成功
+        if (auth.sendSms.loaded && auth.sendSms.success) {
+            message.success('请及时查看手机短信~')
+            setSendSmsLoading(false)
+        }
+
+        /* =========================== */
+
+        // 登录失败
+        if (auth.signin.loaded && !auth.signin.success) {
+            message.error(auth.signin.message)
+            setLoginLoading(false)
+        }
+        // 登录成功
+        if (auth.signin.loaded && auth.signin.success) {
+            setLoginLoading(false)
+            // 跳转至首页
+            jumpToIndex()
+        }
+    }, [
+        auth.sendSms,
+        setSendSmsLoading,
+        auth.signin,
+        setLoginLoading,
+        jumpToIndex,
+    ])
+
+    // 获取表单实例
+    const [form] = Form.useForm()
 
     // 发送短信验证码
     const sendMessage = () => {
-        // 是否已发送短信验证码标志
-        setIsSendMeesage(false)
-
-        // 调用云函数中名为 loginAPI 的函数
-        inspirecloud
-            .run('sendMessageAPI', {
-                phoneNumber,
-            })
-            .then(res => {
-                if (res.sucess) {
-                    console.log(res.message)
-                } else {
-                    message.error(res.message)
-                }
-
-                setIsSendMeesage(true)
-            })
+        setSendSmsLoading(true)
+        // 获取手机号码
+        const value: string = form.getFieldsValue().phoneNumber
+        dispatch(lightSendSms(value))
+        setLoginLoading(false)
     }
 
     // 表单事件结束
-    const onFinish = (values: any) => {
-        const { phoneNumber, authCode: code } = values
-
-        setIsLogin(true)
-
-        // 调用云函数中名为 loginAPI 的函数
-        inspirecloud
-            .run('loginByCode', {
-                phoneNumber,
-                code,
-            })
-            .then(res => {
-                setIsLogin(false)
-                if (res.sucess) {
-                    jumpToIndex()
-                } else {
-                    message.error(res.message)
-                }
-            })
+    const onFinish = (value: any) => {
+        setLoginLoading(true)
+        dispatch(lightSigninByCode(value))
     }
 
     return (
         <StyledForm
-            name='normal_login'
+            name='normal_signin'
             initialValues={{ remember: true }}
+            form={form}
             onFinish={onFinish}
         >
             <Form.Item
@@ -116,11 +132,12 @@ const LoginPhone: FC<phoneProps> = memo(props => {
                 <Input
                     prefix={<MobileTwoTone />}
                     placeholder='手机号'
-                    onChange={e => enterPhoneNumber(e)}
+                    value={phoneNumber}
+                    onChange={e => setPhoneNumber(e.target.value)}
                 />
             </Form.Item>
             <Form.Item
-                name='authCode'
+                name='code'
                 rules={[
                     { required: true, message: '请输入短信验证码' },
                     { validator: validateCode },
@@ -141,8 +158,8 @@ const LoginPhone: FC<phoneProps> = memo(props => {
                         size='middle'
                         style={{ width: '40%' }}
                         disabled={!isEnterNumber}
-                        loading={!isSendMessage}
-                        onClick={e => sendMessage()}
+                        loading={sendSmsLoading}
+                        onClick={() => sendMessage()}
                     >
                         短信验证
                     </Button>
@@ -150,10 +167,10 @@ const LoginPhone: FC<phoneProps> = memo(props => {
             </Form.Item>
             <Form.Item>
                 <Button
-                    className='login-form-button'
+                    className='signin-form-button'
                     type='primary'
                     htmlType='submit'
-                    loading={isLogin}
+                    loading={loginLoading}
                 >
                     注册 / 登录
                 </Button>
