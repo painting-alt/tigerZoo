@@ -4,6 +4,8 @@ const defaultState = {
     article: '',
     title: '',
     tag: '',
+    all: [],
+    onArticle: {},
 }
 
 function reducer(state = defaultState, action: any) {
