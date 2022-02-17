@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 
 //引入自己的组件
 import AppHeader from '@/components/app-header'
-import PublishModal from '../publish-modal'
+import PublishModal from './publish-modal'
 
 // 样式相关
 import 'react-markdown-editor-lite/lib/index.css'
@@ -31,7 +31,7 @@ export default memo(function Public() {
         dispatch(changeArticleAction(text))
     }
     return (
-        <div>
+        <>
             <AppHeader>
                 <Button
                     className='point'
@@ -54,6 +54,6 @@ export default memo(function Public() {
                     changeText(text)
                 }}
             />
-        </div>
+        </>
     )
 })

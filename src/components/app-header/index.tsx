@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // 自定义组件
-import UserAvatar from './cpns/userAvatar'
+import UserAvatar from './components/user-avatar'
 
 // redux 相关
 import { useSelector } from 'react-redux'
@@ -34,7 +34,7 @@ export default memo(function HQAppHeader(props) {
     return (
         <Header>
             <div className='actionBar'>
-                <Link href='/#'>
+                <Link href='/'>
                     <Image
                         src={logo}
                         alt='tigerZoo`s logo. this app`s logo'
@@ -44,9 +44,10 @@ export default memo(function HQAppHeader(props) {
                     />
                 </Link>
                 <Space className='operationalZone' size='large'>
+                    {/* 插槽 */}
                     {props.children}
 
-                    <Link href='/#' target='_blank' style={{ color: '#000' }}>
+                    <Link href='/' target='_blank' style={{ color: '#000' }}>
                         <BulbOutlined style={{ fontSize: '20px' }} />
                     </Link>
                     {isLogin ? (
