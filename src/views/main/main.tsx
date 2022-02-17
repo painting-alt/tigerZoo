@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 // 样式
@@ -9,16 +9,19 @@ import { changeAllArtcile } from '@/store/article/actionCreators'
 import { getAllArticle } from '@/network/getArticle'
 
 export default memo(function Main() {
-  let navigate = useNavigate();
-  const dispatch = useDispatch()
-  // 进入这个页面就发送网络请求
-    const fetch = async () => {
-        const result: any = await getAllArticle()
-        console.log(result)
-        dispatch(changeAllArtcile(result.result))
+    let navigate = useNavigate()
+    const dispatch = useDispatch()
 
+    async function fetch() {
+        const result: any = await getAllArticle()
+        dispatch(changeAllArtcile(result.result))
     }
-    fetch()
+
+    // 进入这个页面就发送网络请求
+    useEffect(() => {
+        fetch()
+    })
+
     function handleItemClick(item: string) {
         switch (item) {
             case 'discuss':

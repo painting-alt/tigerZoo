@@ -1,5 +1,5 @@
 // 第三方库
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 // 样式
@@ -11,20 +11,9 @@ import { SearchOutlined } from '@ant-design/icons'
 import AppHeader from '@/components/app-header'
 import AppAside from '@/components/app-aside'
 
-// redux 相关
-import { useDispatch } from 'react-redux'
-import { isAuth } from '@/store/user/actionCreators'
-
 export default memo(function AppHome() {
-    // 获取 dispatch 方法
-    const dispatch = useDispatch()
-
-    // 根据 token 判断用户登录态
-    useEffect(() => {
-        dispatch(isAuth())
-    }, [dispatch])
-
     let navigation = useNavigate()
+
     const publish = () => {
         navigation('/publish')
     }

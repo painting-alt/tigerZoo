@@ -56,6 +56,7 @@ const signup: FC<signupProps> = memo(props => {
 
     // 获取注册结果
     const auth = useSelector<IAppState, IAuthState>(state => state.auth)
+
     // 表单实例
     const [form] = Form.useForm()
 
