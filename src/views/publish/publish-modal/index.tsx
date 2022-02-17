@@ -47,14 +47,14 @@ const Publish: React.FC<publishProps> = memo(props => {
             setConfirmLoading(false)
         }, 2000)
         // 发送网络请求，将store中的title、article、tag发送到后台
-        console.log(articleTitle, article, articleTag);
+        // console.log(articleTitle, article, articleTag);
            const res:any =  await publishData({
                 title: articleTitle,
                 content: article,
                 tag: articleTag
            })
-        console.log(res)
-        const id = res._id
+        // console.log(res)
+        const id = res.articleItem._id
         navigation('/preview/'+id)
         
     }
@@ -71,17 +71,27 @@ const Publish: React.FC<publishProps> = memo(props => {
     const changeTitle = (el: any) => {
         // console.log(el.target.value)
         setTitle(el.target.value)
+        if (el.target.value.length) {
+            setIsTag(false)
+        } else { 
+            setIsTag(true)
+        }
+        if (el.target.value && article) {
+            setIsPublish(false)
+        } else { 
+            setIsPublish(true)
+        }
     }
 
     const changeTitleOk = () => {
         dispatch(changeTitleAction(title))
-        setIsTag(false)
+        // setIsTag(false)
     }
 
     const changeTag = (value: any) => {
         // console.log(value)
         dispatch(changeTagAction(value))
-        setIsPublish(false)
+        // setIsPublish(false)
     }
 
     return (

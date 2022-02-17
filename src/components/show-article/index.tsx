@@ -57,7 +57,7 @@ export default memo(function ShowArticle(props: IParam) {
 
     return (
         <div style={{ padding: '30px' }}>
-            <h1>{oneArticle.tiitle}</h1>
+            <h1>{oneArticle.title}</h1>
             <div className={articleStyle.p}>
                 <ReactMarkdown
                     children={oneArticle.content}

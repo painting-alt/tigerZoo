@@ -10,13 +10,13 @@ export default memo(function ShowArticle() {
     const articleStore = useSelector((state: any) => state.article)
 
     const article = articleStore.article
-
+    const title = articleStore.title
     return (
         <div style={{ padding: '30px' }}>
-            <h1>{article.title}</h1>
+            <h1>{title}</h1>
             <div className={articleStyle.p}>
                 <ReactMarkdown
-                    children={article.article}
+                    children={article}
                     remarkPlugins={[remarkGfm]}
                 />
             </div>
