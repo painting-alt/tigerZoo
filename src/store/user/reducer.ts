@@ -1,4 +1,11 @@
-import { ISSIGNIN, ISSIGNOUT } from './constants'
+import {
+    ISSIGNIN,
+    ISSIGNOUT,
+    SIGNOUT,
+    SIGNOUT_SUCCESS,
+    SIGNOUT_FAIL,
+    RESET_SIGNOUT,
+} from './constants'
 
 import { IUserState, IUserUnionType } from './type'
 
@@ -14,6 +21,11 @@ const initialState: IUserState = {
         intro: '',
         email: '',
         phoneNumber: '',
+    },
+    signout: {
+        loaded: false,
+        success: false,
+        message: '',
     },
 }
 
@@ -37,6 +49,46 @@ export default function userReducer(
                     isAuth: false,
                 },
             }
+        case SIGNOUT:
+            return {
+                ...state,
+                signout: {
+                    loaded: false,
+                    success: false,
+                    message: '',
+                },
+            }
+
+        case SIGNOUT_SUCCESS:
+            return {
+                ...state,
+                signout: {
+                    loaded: true,
+                    success: true,
+                    message: '',
+                },
+            }
+        case SIGNOUT_FAIL: {
+            return {
+                ...state,
+                signout: {
+                    loaded: true,
+                    success: false,
+                    message: action.message,
+                },
+            }
+        }
+
+        case RESET_SIGNOUT: {
+            return {
+                ...state,
+                signout: {
+                    loaded: false,
+                    success: false,
+                    message: '',
+                },
+            }
+        }
         default:
             return state
     }

@@ -6,7 +6,8 @@ import AppHeader from '@/components/app-header'
 import SearchInput from '@/components/app-header/components/search-input'
 import PostButton from '@/components/app-header/components/post-button'
 import AppAside from '@/components/app-aside'
-import UserCard from '@/components/app-aside/components/user'
+import UserPost from '@/components/app-aside/components/user-post'
+import Userinfo from '@/components/app-aside/components/userinfo'
 
 // 样式相关
 import appStyle from '@/assets/css/css_modules/app.module.css'
@@ -23,7 +24,8 @@ const UserView = memo(() => {
                     <Outlet />
                 </div>
                 <AppAside>
-                    <UserCard />
+                    <UserPost />
+                    <Userinfo />
                 </AppAside>
             </div>
         </>

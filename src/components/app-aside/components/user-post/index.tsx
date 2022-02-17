@@ -4,6 +4,7 @@ import React, { memo } from 'react'
 import Card from './styled'
 import { Space, Avatar, Divider } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 
 const UserInfo = memo(() => {
     return (
@@ -20,8 +21,11 @@ const UserInfo = memo(() => {
 })
 
 export default memo(() => {
+    // 获取 navigation 方法
+    const navigation = useNavigate()
+
     return (
-        <Card title={<UserInfo />}>
+        <Card title={<UserInfo />} onClick={() => navigation('/user')}>
             <Space
                 align='center'
                 size='middle'

@@ -13,7 +13,7 @@ import SearchInput from '@/components/app-header/components/search-input'
 import PostButton from '@/components/app-header/components/post-button'
 import AppAside from '@/components/app-aside'
 import CommunityCard from '@/components/app-aside/components/community'
-import UserCard from '@/components/app-aside/components/user'
+import UserCard from '@/components/app-aside/components/user-post'
 import AnnouncementCard from '@/components/app-aside/components/announcement'
 import Popular from '@/components/app-aside/components/popular'
 

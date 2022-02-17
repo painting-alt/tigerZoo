@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { Card } from 'antd'
 
 export default styled(Card)`
+    cursor: pointer;
+
     .divider {
         height: 32px;
         background-color: rgba(204, 204, 204, 0.2);
