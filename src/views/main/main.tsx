@@ -9,16 +9,14 @@ import { changeAllArtcile } from '@/store/article/actionCreators'
 import { getAllArticle } from '@/network/getArticle'
 
 export default memo(function Main() {
-    let navigate = useNavigate()
-    const dispatch = useDispatch()
-    // 进入这个页面就发送网络请求
+  let navigate = useNavigate();
+  const dispatch = useDispatch()
+  // 进入这个页面就发送网络请求
     const fetch = async () => {
         const result: any = await getAllArticle()
         console.log(result)
-        function pushToStore() {
-            dispatch(changeAllArtcile(result.result))
-        }
-        pushToStore()
+        dispatch(changeAllArtcile(result.result))
+
     }
     fetch()
     function handleItemClick(item: string) {
