@@ -48,7 +48,7 @@ export default memo(function Public() {
                 <PublishModal visible={visible} setVisible={setVisible} />
             </AppHeader>
             <MdEditor
-                style={{ height: '500px' }}
+                style={{ height: '91vh' }}
                 renderHTML={text => mdParser.render(text)}
                 onChange={({ text, html }, event) => {
                     changeText(text)

@@ -22,15 +22,14 @@ export default memo(function ShowArticle(props: IParam) {
     // 解构组件参数
     const { id } = useParams()
 
-    // 获取 store.article 数据
-    const article = useSelector((state: any) => state.article)
+    // 获取 dispatch 方法
+    const dispatch = useDispatch()
 
+    // 获取 store 数据
+    const article = useSelector((state: any) => state.article)
     const oneArticle = article.oneArticle
     const view = oneArticle.view || 0
     const lastTime: number = oneArticle.timeRecord || 0
-
-    // 获取 dispatch 方法
-    const dispatch = useDispatch()
 
     useEffect(() => {
         async function getData() {
@@ -58,10 +57,10 @@ export default memo(function ShowArticle(props: IParam) {
 
     return (
         <div style={{ padding: '30px' }}>
-            <h1>{oneArticle.title}</h1>
+            <h1>{oneArticle.tiitle}</h1>
             <div className={articleStyle.p}>
                 <ReactMarkdown
-                    children={oneArticle.title}
+                    children={oneArticle.content}
                     remarkPlugins={[remarkGfm]}
                 />
             </div>

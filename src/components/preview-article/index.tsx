@@ -10,6 +10,7 @@ export default memo(function ShowArticle() {
     const articleStore = useSelector((state: any) => state.article)
 
     const article = articleStore.article
+
     return (
         <div style={{ padding: '30px' }}>
             <h1>{article.title}</h1>
