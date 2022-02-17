@@ -34,9 +34,9 @@ const Publish: React.FC<publishProps> = memo(props => {
 
     const navigation = useNavigate()
 
-    const articleTitle = useSelector((state: any) => state.title)
-    const article = useSelector((state: any) => state.article)
-    const articleTag = useSelector((state: any) => state.tag)
+    const articleTitle = useSelector((state: any) => state.article.title)
+    const article = useSelector((state: any) => state.article.article)
+    const articleTag = useSelector((state: any) => state.article.tag)
 
     let timer:any = null;
     const handleOk = async () => {

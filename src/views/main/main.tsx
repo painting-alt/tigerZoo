@@ -14,7 +14,7 @@ export default memo(function Main() {
   // 进入这个页面就发送网络请求
     const fetch = async () => {
         const result: any = await getAllArticle()
-        console.log(result)
+        // console.log(result)
         dispatch(changeAllArtcile(result.result))
 
     }

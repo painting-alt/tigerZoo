@@ -7,13 +7,14 @@ import remarkGfm from 'remark-gfm'
 import articleStyle from '@/assets/css/css_modules/article.module.css'
 
 export default memo(function ShowArticle() {
-    const article = useSelector((state: any) => state.article)
+    const article = useSelector((state: any) => state.article.article)
+    const title = useSelector((state:any)=>state.article.title)
     return (
         <div style={{ padding: '30px' }}>
-            <h1>{article.title}</h1>
+            <h1>{title}</h1>
             <div className={articleStyle.p}>
                 <ReactMarkdown
-                    children={article.article}
+                    children={article}
                     remarkPlugins={[remarkGfm]}
                 />
             </div>

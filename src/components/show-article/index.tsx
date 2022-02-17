@@ -19,11 +19,11 @@ interface IParam {
 }
 
 export default memo(function ShowArticle(props:IParam) {
-  const articleTitle = useSelector((state: any) => state.oneArticle.title)
-  const article = useSelector((state: any) => state.oneArticle.content)
+  const articleTitle = useSelector((state: any) => state.article.oneArticle.title)
+  const article = useSelector((state: any) => state.article.oneArticle.content)
   // const articleTag = useSelector((state: any) => state.oneArticle.tag)
-  let view = useSelector((state: any) => state.oneArticle.view) || 0;
-  let lastTime:number = useSelector((state:any)=>state.oneArticle.timeRecord) || 0
+  let view = useSelector((state: any) => state.article.oneArticle.view) || 0;
+  let lastTime:number = useSelector((state:any)=>state.article.oneArticle.timeRecord) || 0
   const { id } = useParams();
   const dispatch = useDispatch()
   useEffect(() => {

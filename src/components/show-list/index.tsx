@@ -23,7 +23,7 @@ export default memo(function ShowList(props:ShowListProps) {
     let dispatch = useDispatch()
     let navigate = useNavigate();
     const all = useSelector((state: any) => state.article.all)
-    console.log(all)
+    // console.log(all)
   const { tag } = props
     // 点击一篇文章，跳转到展示页面
     async function jumpToArticle(id: string) {
