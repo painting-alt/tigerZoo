@@ -1,16 +1,17 @@
 // 第三方组件
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // 自定义组件
 import UserAvatar from './components/user-avatar'
 
 // redux 相关
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { isAuth, lightGetInfo } from '@/store/user/actionCreators'
 
 // 样式相关
 import Header from './styled'
-import { Space, Button, Typography, Image } from 'antd'
+import { Space, Button, Typography, Image, message } from 'antd'
 import { BulbOutlined } from '@ant-design/icons'
 
 // assets
@@ -21,15 +22,33 @@ import { IUserState } from '@/store/user/type'
 const { Link } = Typography
 
 export default memo(function HQAppHeader(props) {
+    // 获取 dispatch、navigation 方法
+    const dispatch = useDispatch()
+    const navigation = useNavigate()
+
+    // 根据 token 判断用户登录态
+    useEffect(() => {
+        // 页面加载时 判断是否是登录态
+        dispatch(isAuth())
+    }, [dispatch])
+
     // 获取用户登录态
     const user = useSelector<IAppState, IUserState>(state => state.user)
+
     const isLogin = user.userStatus.isAuth
     console.log(isLogin)
 
-    const navigation = useNavigate()
-    const jumpToLogin = () => {
-        navigation('/auth')
-    }
+    // 登录态为 success 时 请求用户信息
+    useEffect(() => {
+        if (isLogin) {
+            dispatch(lightGetInfo())
+
+            // 请求用户信息失败，提示报错信息
+            if (user.getInfo.loaded && !user.getInfo.success) {
+                message.error(user.getInfo.message)
+            }
+        }
+    }, [isLogin, user.getInfo, dispatch])
 
     return (
         <Header>
@@ -53,7 +72,9 @@ export default memo(function HQAppHeader(props) {
                     {isLogin ? (
                         <UserAvatar />
                     ) : (
-                        <Button onClick={() => jumpToLogin()}>登录</Button>
+                        <Button onClick={() => navigation('/auth')}>
+                            登录
+                        </Button>
                     )}
                 </Space>
             </div>

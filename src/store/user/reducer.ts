@@ -1,10 +1,18 @@
 import {
+    // 登录态判断
     ISSIGNIN,
     ISSIGNOUT,
+    // 退出登录
     SIGNOUT,
     SIGNOUT_SUCCESS,
     SIGNOUT_FAIL,
     RESET_SIGNOUT,
+    // 请求用户信息相关
+    GETINFO,
+    GETINFO_SUCCESS,
+    GETINFO_FAIL,
+    RESET_GETINFO,
+    UPDATE_LOCALINFO,
 } from './constants'
 
 import { IUserState, IUserUnionType } from './type'
@@ -23,6 +31,11 @@ const initialState: IUserState = {
         phoneNumber: '',
     },
     signout: {
+        loaded: false,
+        success: false,
+        message: '',
+    },
+    getInfo: {
         loaded: false,
         success: false,
         message: '',
@@ -49,23 +62,22 @@ export default function userReducer(
                     isAuth: false,
                 },
             }
+        /* ================================================================== */
+        // 用户退出登录
         case SIGNOUT:
             return {
                 ...state,
                 signout: {
                     loaded: false,
                     success: false,
-                    message: '',
                 },
             }
-
         case SIGNOUT_SUCCESS:
             return {
                 ...state,
                 signout: {
                     loaded: true,
                     success: true,
-                    message: '',
                 },
             }
         case SIGNOUT_FAIL: {
@@ -78,7 +90,6 @@ export default function userReducer(
                 },
             }
         }
-
         case RESET_SIGNOUT: {
             return {
                 ...state,
@@ -89,6 +100,53 @@ export default function userReducer(
                 },
             }
         }
+        /* =========================================================================== */
+        // 获取用户信息相关
+        case GETINFO:
+            return {
+                ...state,
+                signout: {
+                    loaded: false,
+                    success: false,
+                },
+            }
+        case GETINFO_SUCCESS:
+            return {
+                ...state,
+                signout: {
+                    loaded: true,
+                    success: true,
+                },
+            }
+        case GETINFO_FAIL:
+            return {
+                ...state,
+                signout: {
+                    loaded: true,
+                    success: false,
+                    message: action.message,
+                },
+            }
+
+        case RESET_GETINFO:
+            return {
+                ...state,
+                signout: {
+                    loaded: false,
+                    success: false,
+                    message: '',
+                },
+            }
+
+        /* =========================================================== */
+        /* 本地用户数据相关 */
+        case UPDATE_LOCALINFO:
+            return {
+                ...state,
+                userInfo: {
+                    ...action.userInfo,
+                },
+            }
         default:
             return state
     }

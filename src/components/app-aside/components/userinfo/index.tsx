@@ -1,15 +1,14 @@
 import React, { memo } from 'react'
 
+// 自定义组件
+import UpdateDataBtn from './components/upadte-data'
+
 // 样式相关
 import CardStyled from './styled'
 import { Card, Avatar } from 'antd'
-import { EditOutlined, SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined } from '@ant-design/icons'
 
 const { Meta } = Card
-
-const Signout = memo(() => {
-    return <span className='signout'>退出登录</span>
-})
 
 const Userinfo = memo(() => {
     return (
@@ -21,11 +20,7 @@ const Userinfo = memo(() => {
                     src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
                 />
             }
-            actions={[
-                <SettingOutlined key='setting' />,
-                <EditOutlined key='edit' />,
-                <Signout />,
-            ]}
+            actions={[<SettingOutlined key='setting' />, <UpdateDataBtn />]}
         >
             <Meta
                 avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}

@@ -33,17 +33,13 @@ export default function UserAvatar() {
         if (user.signout.loaded && user.signout.success) {
             // 跳转至首页
             navigation('/')
+            // 重置退出登录状态
+            dispatch(resetSignout())
         }
 
         // 退出登录失败 显示失败的提示信息
         if (user.signout.loaded && !user.signout.success) {
-            console.log(11)
             message.error(user.signout.message)
-        }
-
-        return () => {
-            // 离开也面前重置退出登录状态
-            dispatch(resetSignout())
         }
     }, [navigation, user.signout, dispatch])
 

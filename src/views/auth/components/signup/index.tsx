@@ -82,22 +82,18 @@ const signup: FC<signupProps> = memo(props => {
     // 监听状态
     useEffect(() => {
         // 1. 注册成功, 清空表单、清除按钮 loading 并跳转至 index 页面
-        return () => {
-            if (auth.signup.loaded && auth.signup.success) {
-                form.resetFields()
-                setConfirmLoading(false)
-                jumpToIndex()
-            }
+        if (auth.signup.loaded && auth.signup.success) {
+            form.resetFields()
+            setConfirmLoading(false)
+            jumpToIndex()
         }
-    }, [auth.signup, form, jumpToIndex])
 
-    useEffect(() => {
         // 2. 注册失败 显示失败的提示信息
         if (auth.signup.loaded && !auth.signup.success) {
             setConfirmLoading(false)
             message.error(auth.signup.message)
         }
-    }, [auth.signup])
+    }, [auth.signup, form, jumpToIndex])
 
     // 3. 离开页面之前重置页面注册状态
     useEffect(() => {
