@@ -17,6 +17,7 @@ import {
 
 // userInfo 类型
 export interface IUserInfoState {
+    _id: string
     username: string
     nickname: string
     avatar: string

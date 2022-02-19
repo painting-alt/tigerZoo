@@ -23,6 +23,7 @@ const initialState: IUserState = {
         isAuth: false, // 默认为 未登录
     },
     userInfo: {
+        _id: '',
         username: '',
         nickname: '',
         avatar: '',
@@ -105,7 +106,7 @@ export default function userReducer(
         case GETINFO:
             return {
                 ...state,
-                signout: {
+                getInfo: {
                     loaded: false,
                     success: false,
                 },
@@ -113,7 +114,7 @@ export default function userReducer(
         case GETINFO_SUCCESS:
             return {
                 ...state,
-                signout: {
+                getInfo: {
                     loaded: true,
                     success: true,
                 },
@@ -121,7 +122,7 @@ export default function userReducer(
         case GETINFO_FAIL:
             return {
                 ...state,
-                signout: {
+                getInfo: {
                     loaded: true,
                     success: false,
                     message: action.message,
@@ -131,7 +132,7 @@ export default function userReducer(
         case RESET_GETINFO:
             return {
                 ...state,
-                signout: {
+                getInfo: {
                     loaded: false,
                     success: false,
                     message: '',

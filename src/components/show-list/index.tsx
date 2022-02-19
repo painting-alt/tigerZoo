@@ -51,6 +51,7 @@ export default memo(function ShowList(props: ShowListProps) {
         }
         updateAdd({ id, count, state })
     }
+
     return (
         <div>
             {all.map((item: any) => {

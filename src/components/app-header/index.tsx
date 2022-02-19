@@ -36,19 +36,17 @@ export default memo(function HQAppHeader(props) {
     const user = useSelector<IAppState, IUserState>(state => state.user)
 
     const isLogin = user.userStatus.isAuth
-    console.log(isLogin)
 
     // 登录态为 success 时 请求用户信息
     useEffect(() => {
-        if (isLogin) {
+        if (isLogin && !user.userInfo._id) {
             dispatch(lightGetInfo())
-
             // 请求用户信息失败，提示报错信息
             if (user.getInfo.loaded && !user.getInfo.success) {
                 message.error(user.getInfo.message)
             }
         }
-    }, [isLogin, user.getInfo, dispatch])
+    }, [isLogin, user.getInfo, user.userInfo, dispatch])
 
     return (
         <Header>

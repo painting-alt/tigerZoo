@@ -116,7 +116,6 @@ export const resetGetInfo = (): IResetGetInfoAction => ({
 export const lightGetInfo = () => {
     return (dispatch: any) => {
         inspirecloud.run('getUserInfo', {}).then(res => {
-            console.log(res)
             if (res.success) {
                 dispatch(getInfoSuccess())
                 dispatch(updateLocalInfo(res.userinfo))
