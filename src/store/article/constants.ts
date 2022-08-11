@@ -1,8 +1,0 @@
-// 文章相关 type
-export const CHANGE_ARTICLE = 'CHANGE_ARTICLE'
-export const CHANGE_TITLE = 'CHANGE_TITLE'
-export const CHANGE_TAG = 'CHANGE_TAG'
-export const CHANGE_ALL_ARTICLE = 'CHANGE_ALL_ARTICLE'
-export const CHANGE_ONE_ARTICLE = 'CHANGE_ONE_ARTICLE'
-export const CHANGE_NOW_TIME = 'CHANGE_NOW_TIME'
-export const CHANGE_LAST_TIME = 'CHANGE_LAST_TIME'
